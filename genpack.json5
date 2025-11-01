@@ -4,6 +4,7 @@
     packages: [
         "genpack/devel",
         "sys-apps/memtest86-bin",
+        "app-admin/sysstat",
         "app-containers/docker","app-containers/docker-compose",
         "genpack/wireless",
         "app-misc/screen",
@@ -75,6 +76,7 @@
         "dev-cpp/functional-plus": null,
         "dev-python/cppheaderparser": null,
         "dev-libs/half": null,
+        "sci-libs/lapack": null,
         "dev-util/Tensile": null,
         "sci-ml/huggingface_hub": null,
         "sci-ml/transformers": null, 
@@ -83,6 +85,8 @@
         "sci-ml/accelerate": null,
         "sci-ml/torchvision": null,
         "dev-libs/rocm-opencl-runtime": null,
+        "sci-libs/flexiblas": null,
+        "sci-libs/blas-lapack-aux-wrapper": null,
 	// vLLM stuffs
         "dev-python/blake3": null,
         "dev-python/typer": null,
@@ -110,7 +114,7 @@
         "sci-libs/rocThrust": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/rocSOLVER": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/hipSPARSE": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
-        "sci-libs/hipBLAS": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
+        "sci-libs/hipBLAS": "rocsolver AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/hipSOLVER": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-ml/caffe2": "rocm distributed memefficient AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942", // opencl
         "dev-util/Tensile": "client AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
