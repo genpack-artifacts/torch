@@ -14,14 +14,18 @@
         "dev-vcs/git",
         "app-misc/status-beep",
         "genpack/genpack",
-	"dev-python/pip","dev-python/pipdeptree",
-	"sys-apps/ripgrep",
+        "dev-python/pip","dev-python/pipdeptree",
+        "sys-apps/ripgrep",
         "media-gfx/chafa",
-	// vLLM stuffs
-        "dev-python/aiohttp","dev-python/jsonschema","dev-python/blake3","dev-python/cachetools","dev-python/cbor2","dev-python/httpx","sci-ml/huggingface_hub","sci-ml/tokenizers","dev-python/uvicorn","dev-python/typer","dev-python/dill","dev-python/diskcache","dev-python/distlib","dev-python/distro","dev-python/dnspython","dev-python/filelock","dev-python/fsspec","dev-python/httptools","dev-python/email-validator","dev-python/watchfiles","dev-python/starlette","dev-python/cachecontrol","dev-python/msgspec","dev-python/networkx","dev-python/scipy","media-libs/opencv","dev-python/soundfile","dev-python/yarl","dev-python/py-cpuinfo","dev-python/pycountry","dev-python/python-dotenv","dev-python/python-json-logger","dev-python/python-multipart","dev-build/ninja","dev-python/pyzmq","dev-python/regex","dev-python/jsonschema","sci-ml/safetensors","sci-ml/sentencepiece","dev-python/setproctitle","dev-python/shellingham","dev-python/six","dev-python/tqdm","dev-python/pydantic","dev-python/uvloop","dev-python/websockets","dev-python/importlib-metadata",
+        "net-analyzer/zabbix",
+        // vLLM stuffs
+        "dev-python/aiohttp","dev-python/jsonschema","dev-python/blake3","dev-python/cachetools","dev-python/cbor2","dev-python/httpx","sci-ml/huggingface_hub","sci-ml/tokenizers","dev-python/uvicorn","dev-python/typer","dev-python/dill","dev-python/diskcache","dev-python/distlib","dev-python/distro","dev-python/dnspython","dev-python/filelock","dev-python/fsspec","dev-python/httptools","dev-python/email-validator","dev-python/watchfiles","dev-python/starlette","dev-python/cachecontrol","dev-python/msgspec","dev-python/networkx","dev-python/scipy","media-libs/opencv","dev-python/soundfile","dev-python/yarl","dev-python/py-cpuinfo","dev-python/pycountry","dev-python/python-dotenv","dev-python/python-json-logger","dev-python/python-multipart","dev-build/ninja","dev-python/pyzmq","dev-python/regex","dev-python/jsonschema","sci-ml/safetensors","sci-ml/sentencepiece","dev-python/setproctitle","dev-python/six","dev-python/tqdm","dev-python/pydantic","dev-python/uvloop","dev-python/websockets","dev-python/importlib-metadata",
         "sci-ml/torchvision",
         "sci-ml/accelerate",
         "sci-ml/transformers",
+        // compel stuffs
+        "dev-python/notebook",
+        "dev-python/networkx",
     ],
     accept_keywords: {
         "sys-fs/fatcat": null,
@@ -61,6 +65,7 @@
         "sci-libs/rocThrust": null,
         "sci-libs/rocBLAS": null,
         "sci-libs/rocFFT": null,
+        "sci-libs/blis": null,
         "dev-util/roctracer": null,
         "sci-libs/miopen": null,
         "dev-libs/rocm-core": null,
@@ -87,18 +92,22 @@
         "dev-libs/rocm-opencl-runtime": null,
         "sci-libs/flexiblas": null,
         "sci-libs/blas-lapack-aux-wrapper": null,
-	// vLLM stuffs
+        // vLLM stuffs
         "dev-python/blake3": null,
         "dev-python/typer": null,
         "dev-python/msgspec": null,
         "dev-python/soundfile": null,
         "sci-ml/safetensors": null,
         "sci-ml/sentencepiece": null,
-
+        "sci-ml/hf_xet": null,
+        // compel stuffs
+        "dev-python/notebook": null,
+        "dev-python/jupyterlab": null,
     },
     use: {
         "media-libs/libglvnd": "X",
         "media-gfx/chafa": "webp",
+        "net-analyzer/zabbix": "-postgres",
         "sci-libs/rocPRIM": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "dev-util/roctracer": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/rocRAND": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
@@ -106,7 +115,7 @@
         "sci-libs/hipBLASLt": "benchmark roctracer AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/rocFFT": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/rocSPARSE": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
-        "sci-libs/rocBLAS": "benchmark hipblaslt AMDGPU_TARGETS: gfx1200 gfx1010 -gfx90a -gfx908 -gfx942", // gfx1103
+        "sci-libs/rocBLAS": "benchmark -hipblaslt AMDGPU_TARGETS: gfx1200 -gfx1103 gfx1010 -gfx90a -gfx908 -gfx942", // hipblaslt causes roc::hipblas-common. gfx1103 causes error
         "sci-libs/hipCUB": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/hipFFT": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/hipRAND": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
@@ -116,11 +125,14 @@
         "sci-libs/hipSPARSE": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/hipBLAS": "rocsolver AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
         "sci-libs/hipSOLVER": "AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
-        "sci-ml/caffe2": "rocm distributed memefficient AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942", // opencl
+        "sci-ml/caffe2": "rocm distributed memefficient flash AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942", // memefficient pulls sci-libs/aotriton-bin-0.11 that is non-ROCm 7.1 ready dependency so disabled at the moment
         "dev-util/Tensile": "client AMDGPU_TARGETS: gfx1200 gfx1010 gfx1103 -gfx90a -gfx908 -gfx942",
-	"sci-ml/transformers": "torch",
+        "sci-ml/transformers": "torch",
         "media-libs/opencv": "python",
-        "sci-ml/torchvision": "rocm"
+        "sci-ml/torchvision": "rocm",
+        // compel stuffs
+        "dev-python/ipython": "-gui",
+        "net-libs/nodejs": "npm",
     },
     license: {
         "sys-kernel/linux-firmware": "linux-fw-redistributable",
@@ -172,4 +184,4 @@
         }
     }
 }
-// pip install --break-system-packages diffusers transformers accelerate
+// pip install --break-system-packages diffusers transformers accelerate compel
